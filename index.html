@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio 3D – Domotique</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="viewport">
+    <div class="toolbar">
+      <span id="status" class="status">…</span>
+      <button id="walls">✂️ Coupe</button>
+      <button id="night">🌙 Nuit</button>
+      <button id="reset-view">⟲ Vue</button>
+      <button id="open-settings" title="Connexion Home Assistant">⚙</button>
+    </div>
+    <div class="hint">Clic sur une prise / lampe = on/off · glisser = tourner · molette = zoom</div>
+  </main>
+
+  <aside id="panel">
+    <section class="hero">
+      <div class="kicker">Consommation instantanée</div>
+      <div class="total" id="total">0 W</div>
+      <div class="meta"><span id="cost">–</span><span>Énergie : <b id="energy">–</b></span></div>
+      <canvas id="spark"></canvas>
+    </section>
+
+    <section>
+      <h2>Prises <span id="sum-outlets"></span></h2>
+      <div id="list-outlets" class="list"></div>
+    </section>
+
+    <section>
+      <h2>Éclairage <span id="sum-lights"></span></h2>
+      <div id="list-lights" class="list"></div>
+    </section>
+  </aside>
+
+  <dialog id="settings">
+    <form method="dialog">
+      <h3>Connexion Home Assistant</h3>
+      <label>URL
+        <input id="ha-url" type="url" placeholder="http://homeassistant.local:8123" />
+      </label>
+      <label>Jeton d'accès longue durée
+        <input id="ha-token" type="password" placeholder="eyJhbGciOi…" />
+      </label>
+      <p class="small">Profil HA → Sécurité → « Jetons d'accès longue durée ». Le jeton reste dans ce navigateur (localStorage).</p>
+      <div class="actions">
+        <button id="use-demo" class="ghost">Mode démo</button>
+        <button id="connect">Se connecter</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
